@@ -1,0 +1,235 @@
+
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111111">
+<title>ARZ Collections | অনলাইন বোরকা শপ</title>
+<style>
+:root{--black:#111;--gold:#c7a45b;--cream:#faf7ef;--white:#fff;--muted:#6d6d6d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:#181818;font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif}
+header{background:var(--black);color:white;padding:16px 14px;border-bottom:3px solid var(--gold);position:sticky;top:0;z-index:5}
+.head{max-width:1100px;margin:auto;display:flex;align-items:center;gap:12px;justify-content:space-between}
+.brand{font-weight:800;font-size:22px;letter-spacing:.4px;color:var(--gold)}
+.sub{font-size:12px;color:#eee}
+button,.btn{border:0;background:var(--gold);color:#171717;padding:12px 15px;border-radius:9px;font-weight:700;font-size:15px;cursor:pointer}
+.hero{background:linear-gradient(130deg,#111 0%,#25221c 60%,#584622 100%);color:#fff;padding:36px 18px;text-align:center}
+.hero h1{margin:0 0 10px;font-size:clamp(26px,6vw,42px);color:#e0c17c}
+.hero p{margin:0 auto 18px;max-width:600px;line-height:1.8}
+.wrap{max-width:1100px;margin:auto;padding:22px 14px}
+.notice{background:#fff;border:1px solid #e8dfca;border-radius:12px;padding:14px;line-height:1.8;margin-bottom:18px}
+.section-title{font-size:23px;margin:10px 0 18px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px}
+.product{background:#fff;border:1px solid #e7dfce;border-radius:14px;overflow:hidden;box-shadow:0 3px 12px #00000008}
+.product img{width:100%;height:220px;object-fit:cover;background:#eee}
+.product .pad{padding:12px}
+.product h3{font-size:17px;margin:0 0 8px}
+.price{font-weight:800;color:#8b6823;font-size:18px}
+.muted{color:var(--muted);font-size:13px;line-height:1.6}
+.product button{width:100%;margin-top:10px}
+form{background:#fff;border:1px solid #e7dfce;border-radius:14px;padding:16px;display:grid;gap:12px}
+label{font-weight:650;font-size:14px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font:inherit;background:white}
+textarea{min-height:84px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.total{background:#f7f0df;padding:13px;border-radius:9px;line-height:1.8}
+.status{padding:12px;border-radius:8px;background:#f5f5f5;line-height:1.7;overflow-wrap:anywhere}
+.hidden{display:none}
+footer{background:#111;color:#eee;padding:24px 14px;text-align:center;border-top:3px solid var(--gold);line-height:1.9}
+.small{font-size:12px;color:#777}
+@media(max-width:430px){.product img{height:190px}.two{grid-template-columns:1fr}.hero{padding:28px 14px}}
+</style>
+</head>
+<body>
+<header>
+<div class="head">
+<div><div class="brand">ARZ Collections</div><div class="sub">প্রিমিয়াম বোরকা ও হিজাব</div></div>
+<a href="#order"><button>অর্ডার করুন</button></a>
+</div>
+</header>
+
+<section class="hero">
+<h1>রুচিশীল পর্দার পোশাক</h1>
+<p>প্রিমিয়াম কাপড়, সুন্দর এমব্রয়ডারি ওয়ার্ক এবং আপনার পছন্দের রঙে বোরকা ও হিজাব।</p>
+<a href="#products"><button>পণ্য দেখুন</button></a>
+</section>
+
+<main class="wrap">
+<div class="notice"><b>ডেলিভারি চার্জ:</b> ঢাকার ভিতরে ৳৮০ · ঢাকার বাইরে ৳১৫০<br><b>পেমেন্ট:</b> ক্যাশ অন ডেলিভারি (পণ্য হাতে পেয়ে মূল্য দিন)</div>
+
+<h2 class="section-title" id="products">আমাদের পণ্য</h2>
+<div id="productStatus" class="status">পণ্য লোড হচ্ছে…</div>
+<div id="productsGrid" class="products"></div>
+
+<h2 class="section-title" id="order" style="margin-top:30px">অর্ডার ফর্ম</h2>
+<form id="orderForm">
+<label>পণ্য নির্বাচন
+<select id="productSelect" required><option value="">পণ্য নির্বাচন করুন</option></select>
+</label>
+<div class="two">
+<label>আপনার নাম<input id="customerName" required autocomplete="name" placeholder="পুরো নাম"></label>
+<label>মোবাইল নম্বর<input id="phone" required inputmode="tel" autocomplete="tel" placeholder="01XXXXXXXXX"></label>
+</div>
+<label>সম্পূর্ণ ঠিকানা<textarea id="address" required autocomplete="street-address" placeholder="বাসা/রোড, এলাকা, জেলা"></textarea></label>
+<div class="two">
+<label>এলাকা
+<select id="deliveryArea" required>
+<option value="dhaka">ঢাকার ভিতরে — ৳৮০</option>
+<option value="outside">ঢাকার বাইরে — ৳১৫০</option>
+</select>
+</label>
+<label>রং<input id="color" placeholder="যেমন: কালো / অলিভ"></label>
+</div>
+<div class="two">
+<label>বোরকার লম্বা
+<select id="size">
+<option value="">সাইজ নির্বাচন করুন</option>
+<option>৫০ ইঞ্চি</option><option>৫২ ইঞ্চি</option><option>৫৪ ইঞ্চি</option><option>৫৬ ইঞ্চি</option>
+</select>
+</label>
+<label>প্যাকেজ
+<select id="package">
+<option value="burqa">শুধু বোরকা</option>
+<option value="combo">বোরকা + হিজাব</option>
+</select>
+</label>
+</div>
+<label>অতিরিক্ত নির্দেশনা (ঐচ্ছিক)<textarea id="notes" placeholder="প্রয়োজনে লিখুন"></textarea></label>
+<div class="total" id="totalBox">পণ্যের মূল্য: ৳৮৯৯<br>ডেলিভারি: ৳৮০<br><b>সর্বমোট: ৳৯৭৯</b></div>
+<button type="submit" id="submitBtn">ক্যাশ অন ডেলিভারিতে অর্ডার দিন</button>
+<div id="orderStatus" class="status hidden" role="status"></div>
+</form>
+<p class="small">নিরাপত্তা: এই পেজে কখনো Supabase service_role/secret key বসাবেন না।</p>
+</main>
+
+<footer><b style="color:#d8bb76">ARZ Collections</b><br>আপনার আস্থার অনলাইন বোরকা শপ<br>ঢাকার ভিতরে ডেলিভারি ৳৮০ · ঢাকার বাইরে ৳১৫০</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://jmdgefxvhujdmanjieet.supabase.co";
+const SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY_HERE";
+const clientReady = window.supabase && SUPABASE_ANON_KEY.startsWith("eyJ");
+const db = clientReady ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+let products = [];
+const fmt = n => "৳" + Number(n || 0).toLocaleString("bn-BD");
+const el = id => document.getElementById(id);
+
+function escapeHTML(s){
+ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function productPrice(p){return Number(p?.price)||899}
+function selectedProduct(){return products.find(p=>String(p.id)===el("productSelect").value)}
+
+function updateTotal(){
+ const p=selectedProduct();
+ const base=p?productPrice(p):899;
+ const item=el("package").value==="combo"?1150:base;
+ const delivery=el("deliveryArea").value==="outside"?150:80;
+ el("totalBox").innerHTML="পণ্যের মূল্য: "+fmt(item)+"<br>ডেলিভারি: "+fmt(delivery)+"<br><b>সর্বমোট: "+fmt(item+delivery)+"</b>";
+}
+
+function showProductFallback(message){
+ el("productStatus").textContent=message;
+ if(!products.length){
+  products=[{id:"local-burqa",name:"সিঙ্গেল পার্ট এমব্রয়ডারি বোরকা",description:"ইমপোর্টেড দুবাই চেরি · রং: কালো, অলিভ, কফি, মেরুন · লম্বা: ৫০–৫৬ ইঞ্চি",price:899,image_url:""}];
+  renderProducts();
+ }
+}
+
+function renderProducts(){
+ const grid=el("productsGrid");
+ grid.innerHTML="";
+ el("productSelect").innerHTML='<option value="">পণ্য নির্বাচন করুন</option>';
+ products.forEach(p=>{
+  const opt=document.createElement("option");
+  opt.value=p.id;
+  opt.textContent=p.name+" — "+fmt(productPrice(p));
+  el("productSelect").appendChild(opt);
+  const card=document.createElement("article");
+  card.className="product";
+  const img=document.createElement("img");
+  img.alt=p.name||"বোরকা";
+  img.loading="lazy";
+  img.src=p.image_url||"";
+  img.onerror=()=>{img.style.display="none"};
+  const pad=document.createElement("div");
+  pad.className="pad";
+  pad.innerHTML='<h3>'+escapeHTML(p.name||"বোরকা")+'</h3><div class="price">'+fmt(productPrice(p))+'</div><p class="muted">'+escapeHTML(p.description||"প্রিমিয়াম বোরকা ও হিজাব")+'</p><button type="button">অর্ডার করুন</button>';
+  pad.querySelector("button").onclick=()=>{
+   el("productSelect").value=String(p.id);
+   updateTotal();
+   el("order").scrollIntoView({behavior:"smooth"});
+  };
+  card.append(img,pad);
+  grid.appendChild(card);
+ });
+ el("productStatus").textContent=products.length?"পণ্য "+products.length+"টি":"এখনো পণ্য যোগ করা হয়নি।";
+ updateTotal();
+}
+
+async function loadProducts(){
+ if(!db){
+  showProductFallback("Supabase সংযোগ এখনো সম্পূর্ণ নয়। অনলাইন পণ্য দেখাতে public key বসাতে হবে।");
+  return;
+ }
+ const {data,error}=await db.from("products").select("id,name,description,price,image_url").order("created_at",{ascending:false});
+ if(error){
+  showProductFallback("পণ্য লোড করা যায়নি: "+error.message+"। Supabase key ও read policy যাচাই করুন।");
+  return;
+ }
+ products=data||[];
+ if(products.length)renderProducts();
+ else showProductFallback("Supabase-এ এখনো কোনো পণ্য পাওয়া যায়নি।");
+}
+
+el("productSelect").addEventListener("change",updateTotal);
+el("package").addEventListener("change",updateTotal);
+el("deliveryArea").addEventListener("change",updateTotal);
+
+el("orderForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const status=el("orderStatus");
+ status.classList.remove("hidden");
+ if(!db){
+  status.textContent="অর্ডার অনলাইনে জমা দিতে Supabase public key বসিয়ে সংযোগ সম্পূর্ণ করতে হবে।";
+  return;
+ }
+ const p=selectedProduct();
+ if(!p){status.textContent="আগে একটি পণ্য নির্বাচন করুন।";return;}
+ const delivery=el("deliveryArea").value==="outside"?150:80;
+ const price=el("package").value==="combo"?1150:productPrice(p);
+ const payload={
+  customer_name:el("customerName").value.trim(),
+  phone:el("phone").value.trim(),
+  address:el("address").value.trim(),
+  product_id:typeof p.id==="number"?p.id:null,
+  product_name:p.name,
+  package_type:el("package").value,
+  color:el("color").value.trim(),
+  size:el("size").value,
+  notes:el("notes").value.trim(),
+  product_price:price,
+  delivery_charge:delivery,
+  total_amount:price+delivery,
+  payment_method:"cash_on_delivery",
+  status:"new"
+ };
+ el("submitBtn").disabled=true;
+ el("submitBtn").textContent="জমা হচ্ছে…";
+ const {error}=await db.from("orders").insert(payload);
+ el("submitBtn").disabled=false;
+ el("submitBtn").textContent="ক্যাশ অন ডেলিভারিতে অর্ডার দিন";
+ if(error){
+  status.textContent="অর্ডার জমা হয়নি: "+error.message+". orders টেবিল ও নিরাপদ INSERT policy সেটআপ করতে হবে।";
+  return;
+ }
+ status.textContent="আপনার অর্ডার জমা হয়েছে। ধন্যবাদ!";
+ el("orderForm").reset();
+ updateTotal();
+});
+loadProducts();
+</script>
+</body>
+</html>
